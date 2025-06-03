@@ -263,7 +263,7 @@ def handle_contact(message):
 def show_main_menu(chat_id):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     buttons = [
-        types.KeyboardButton("📋 Мои записи"),
+        types.KeyboardButton("📋 записи"),
         types.KeyboardButton("📝 Запись на приём"),
         types.KeyboardButton("💬 Чат с клиникой"),
         types.KeyboardButton("💰 Информация и цены"),
