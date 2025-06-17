@@ -39,7 +39,6 @@ Pygments==2.18.0
 pyparsing==3.2.3
 pyTelegramBotAPI==4.21.0
 python-dateutil==2.9.0.post0
-pywin32==306
 pyzmq==26.0.3
 requests==2.32.3
 requests-oauthlib==2.0.0
