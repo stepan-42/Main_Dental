@@ -121,26 +121,26 @@ doctors = {
          "experience": "8 лет"}
     ],
     "children": [
-        {"name": "Доктор Сидорова Е.В.", "photo": "doctor3.jpg", "specialization": "Детская стоматология",
+        {"name": "Доктор Сидорова Е.В.", "photo": "doctor1.jpg", "specialization": "Детская стоматология",
          "experience": "12 лет"},
-        {"name": "Доктор Кузнецова М.А.", "photo": "doctor4.jpg", "specialization": "Детская стоматология",
+        {"name": "Доктор Кузнецова М.А.", "photo": "doctor2.jpg", "specialization": "Детская стоматология",
          "experience": "7 лет"}
     ],
     "clean": [
-        {"name": "Доктор Смирнов Д.О.", "photo": "doctor5.jpg", "specialization": "Гигиена и профилактика",
+        {"name": "Доктор Смирнов Д.О.", "photo": "doctor1.jpg", "specialization": "Гигиена и профилактика",
          "experience": "9 лет"},
-        {"name": "Доктор Васильева И.Н.", "photo": "doctor6.jpg", "specialization": "Гигиена полости рта",
+        {"name": "Доктор Васильева И.Н.", "photo": "doctor2.jpg", "specialization": "Гигиена полости рта",
          "experience": "6 лет"}
     ],
     "ort": [
-        {"name": "Доктор Николаев П.Р.", "photo": "doctor7.jpg", "specialization": "Ортодонтия",
+        {"name": "Доктор Николаев П.Р.", "photo": "doctor1.jpg", "specialization": "Ортодонтия",
          "experience": "15 лет"},
-        {"name": "Доктор Федорова Л.Д.", "photo": "doctor8.jpg", "specialization": "Ортодонтия", "experience": "11 лет"}
+        {"name": "Доктор Федорова Л.Д.", "photo": "doctor2.jpg", "specialization": "Ортодонтия", "experience": "11 лет"}
     ],
     "protez": [
-        {"name": "Доктор Громов А.С.", "photo": "doctor9.jpg", "specialization": "Ортопедическая стоматология",
+        {"name": "Доктор Громов А.С.", "photo": "doctor1.jpg", "specialization": "Ортопедическая стоматология",
          "experience": "14 лет"},
-        {"name": "Доктор Белова Т.П.", "photo": "doctor10.jpg", "specialization": "Протезирование",
+        {"name": "Доктор Белова Т.П.", "photo": "doctor2.jpg", "specialization": "Протезирование",
          "experience": "13 лет"}
     ]
 }
@@ -275,7 +275,7 @@ def handle_contact(message):
 def show_main_menu(chat_id):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     buttons = [
-        types.KeyboardButton("📋 записи"),
+        types.KeyboardButton("📋 Мои записи"),
         types.KeyboardButton("📝 Запись на приём"),
         types.KeyboardButton("💬 Чат с клиникой"),
         types.KeyboardButton("💰 Информация и цены"),
@@ -613,6 +613,8 @@ def handle_callback(call):
             "timestamp": datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M").replace(
                 tzinfo=pytz.timezone('Europe/Moscow')).timestamp()
         }
+        if str(user_id) not in appointments:
+            appointments[str(user_id)] = []
         if str(user_id) not in appointments:
             appointments[str(user_id)] = []
         appointments[str(user_id)].append(appointment)
