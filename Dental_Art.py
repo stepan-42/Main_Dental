@@ -1,3 +1,4 @@
+
 import telebot
 from telebot import types
 from datetime import datetime, timedelta
@@ -596,11 +597,12 @@ def handle_callback(call):
 
         photo_path = os.path.join(BASE_IMG_PATH, doctor["photo"])
         try:
-            bot.send_photo(call.message.chat.id, "https://github.com/stepan-42/Main_Dental/tree/master/img/doctor1.jpg",
-                             caption=f"<b>Вам назначен врач:</b>\n{doctor['name']}\n"
-                                    f"<b>Специализация:</b> {doctor['specialization']}\n"
-                                     f"<b>Опыт работы:</b> {doctor['experience']}",
-                             parse_mode='HTML')
+            with open(photo_path, 'rb') as photo:
+                bot.send_photo(call.message.chat.id, photo,
+                               caption=f"<b>{doctor['name']}</b>\n"
+                                       f"{doctor['specialization']}\n"
+                                       f"Опыт работы: {doctor['experience']}",
+                               parse_mode='HTML')
         except FileNotFoundError:
             bot.send_message(call.message.chat.id,
                              f"<b>Вам назначен врач:</b>\n{doctor['name']}\n"
@@ -818,19 +820,17 @@ def check_reminders():
 
 def show_doctors_for_service(chat_id, service):
     inline_keyboard = types.InlineKeyboardMarkup(row_width=1)
+    RAILWAY_BASE_URL = "maindental-production.up.railway.app"
     for i, doctor in enumerate(doctors[service]):
-        photo_path = os.path.join(BASE_IMG_PATH, doctor["photo"])
-        try:
-            with open(photo_path, 'rb') as photo:
-                bot.send_photo(chat_id, photo,
-                               caption=f"<b>{doctor['name']}</b>\n"
-                                       f"{doctor['specialization']}\n"
-                                       f"Опыт работы: {doctor['experience']}",
-                               parse_mode='HTML')
-        except FileNotFoundError:
-            bot.send_message(chat_id, f"Фото врача {doctor['name']} недоступно")
+        photo_url = f"{RAILWAY_BASE_URL}/{doctor['photo']}"  # doctor['photo'] = 'doctor1.jpg'
+        bot.send_photo(chat_id, photo_url,
+                       caption=f"<b>{doctor['name']}</b>\n"
+                               f"{doctor['specialization']}\n"
+                               f"Опыт работы: {doctor['experience']}",
+                       parse_mode='HTML')
         btn = types.InlineKeyboardButton(f"Выбрать {doctor['name']}", callback_data=f"doctor_{i}_{service}")
         inline_keyboard.add(btn)
+
     bot.send_message(chat_id, "👨‍⚕️ Выберите врача:", reply_markup=inline_keyboard)
 
 @bot.message_handler(func=lambda message: True)
