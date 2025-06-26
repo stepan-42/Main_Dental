@@ -332,11 +332,8 @@ def handle_clinic_chat(message):
 
     phone = bonuses[str(user_id)].get("phone")
 
-    if not phone:
-        msg = bot.send_message(user_id, "Для начала чата с администратором, пожалуйста, введите ваш номер телефона:")
-        bot.register_next_step_handler(msg, process_phone_for_chat)
-    else:
-        start_chat_with_admin(user_id, phone)
+
+    start_chat_with_admin(user_id, phone)
 
 
 def process_phone_for_chat(message):
@@ -595,18 +592,15 @@ def handle_callback(call):
             bot.answer_callback_query(call.id, "Запись не найдена.")
 
     elif call.data in ["consultation", "children", "clean", "ort", "protez"]:
-        # Выбираем случайного врача для выбранной услуги
         doctor = random.choice(doctors[call.data])
 
-        # Показываем информацию о враче
         photo_path = os.path.join(BASE_IMG_PATH, doctor["photo"])
         try:
-            with open(photo_path, 'rb') as photo:
-                bot.send_photo(call.message.chat.id, photo,
-                               caption=f"<b>Вам назначен врач:</b>\n{doctor['name']}\n"
-                                       f"<b>Специализация:</b> {doctor['specialization']}\n"
-                                       f"<b>Опыт работы:</b> {doctor['experience']}",
-                               parse_mode='HTML')
+            bot.send_photo(call.message.chat.id, "https://github.com/stepan-42/Main_Dental/tree/master/img/doctor1.jpg",
+                             caption=f"<b>Вам назначен врач:</b>\n{doctor['name']}\n"
+                                    f"<b>Специализация:</b> {doctor['specialization']}\n"
+                                     f"<b>Опыт работы:</b> {doctor['experience']}",
+                             parse_mode='HTML')
         except FileNotFoundError:
             bot.send_message(call.message.chat.id,
                              f"<b>Вам назначен врач:</b>\n{doctor['name']}\n"
@@ -614,10 +608,8 @@ def handle_callback(call):
                              f"<b>Опыт работы:</b> {doctor['experience']}",
                              parse_mode='HTML')
 
-        # Переходим к выбору даты
         set_user_state(call.message.chat.id, f"choosing_date_{call.data}")
 
-        # Формируем доступные даты
         available_dates = []
         today = datetime.now(pytz.timezone('Europe/Moscow'))
         for i in range(1, 8):

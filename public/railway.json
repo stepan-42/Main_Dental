@@ -1,0 +1,12 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "python3 Dental_Art.py"
+  },
+  "static": {
+    "staticRoot": "public",
+    "staticUrl": "/"
+  }
+}

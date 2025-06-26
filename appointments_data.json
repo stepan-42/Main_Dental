@@ -1,59 +1,23 @@
 {
     "appointments": {
-        "861619156": {
-            "service": "children",
-            "doctor": "Доктор Сидорова Е.В.",
-            "date": "2025-06-02",
-            "time": "12:00",
-            "timestamp": 1748856600.0
-        }
-    },
-    "history": {
         "5065171515": [
             {
                 "service": "consultation",
-                "doctor": "Доктор Иванова А.П.",
-                "date": "2025-04-23",
-                "time": "10:00"
-            },
-            {
-                "service": "consultation",
-                "doctor": "Доктор Иванова А.П.",
-                "date": "2025-04-23",
-                "time": "12:00"
-            },
-            {
-                "service": "consultation",
                 "doctor": "Доктор Петров С.И.",
-                "date": "2025-04-30",
-                "time": "10:00"
-            },
-            {
-                "service": "children",
-                "doctor": "Доктор Сидорова Е.В.",
-                "date": "2025-05-21",
-                "time": "12:00"
+                "date": "2025-07-01",
+                "time": "12:00",
+                "timestamp": 1751362200.0
             }
         ],
         "861619156": [
             {
-                "service": "consultation",
-                "doctor": "Доктор Иванова А.П.",
-                "date": "2025-04-25",
-                "time": "16:00"
-            },
-            {
-                "service": "consultation",
-                "doctor": "Доктор Иванова А.П.",
-                "date": "2025-04-25",
-                "time": "14:00"
-            },
-            {
-                "service": "consultation",
-                "doctor": "Доктор Иванова А.П.",
-                "date": "2025-05-27",
-                "time": "14:00"
+                "service": "ort",
+                "doctor": "Доктор Николаев П.Р.",
+                "date": "2025-06-30",
+                "time": "12:00",
+                "timestamp": 1751275800.0
             }
         ]
-    }
+    },
+    "history": {}
 }
